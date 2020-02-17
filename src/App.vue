@@ -47,12 +47,13 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 0.5rem;
+  padding: 2rem;
 }
 .call-to-action {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 2rem 0;
+  margin: 2rem 0 0 0;
 }
 .title {
   text-transform: uppercase;
