@@ -7,7 +7,7 @@
     <span class="menu-text menu-item">Cabelos</span>
     <span class="menu-text menu-item">Infantil</span>
     <div class="image-box">
-      <img src="../assets/shopping_cart-24px.svg" alt class="menu-item menu-image" />
+      <i class="material-icons md-18" style="color:#737171">shopping_cart</i>
     </div>
   </div>
 </template>
@@ -35,6 +35,7 @@ $title-color: #737171;
   align-items: center;
   justify-content: flex-start;
   font-family: "Roboto", sans-serif;
+  border-bottom: 1px solid $line-color;
 }
 .menu-item {
   margin: 0 1rem 0 2rem;
@@ -52,13 +53,21 @@ $title-color: #737171;
   border-left: 1px solid $line-color;
   height: 20px;
   width: 1px;
+  cursor: default !important;
 }
 .image-box {
-  display: inline;
+  display: flex;
   border: 1px solid $line-color;
   border-radius: 20px;
   align-items: center;
   margin-left: auto;
   margin-right: 1rem;
+  width: auto;
+  padding: 6px;
+  width: 2rem;
+  justify-content: center;
+}
+* :hover {
+  cursor: pointer;
 }
 </style>

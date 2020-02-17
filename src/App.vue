@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <Menu />
     <div class="call-to-action">
       <hr class="line" />
@@ -37,7 +38,7 @@ export default {
 $line-color: #fbfbfb;
 $title-color: #817e7e;
 body {
-  margin: 0 !important;
+  margin: 0 0 60px 0 !important;
   padding: 0;
 }
 .product-container {
