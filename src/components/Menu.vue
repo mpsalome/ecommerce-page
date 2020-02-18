@@ -1,12 +1,12 @@
 <template>
   <div class="menu-body">
-    <span class="menu-text menu-item menu-title">Minha Loja</span>
+    <span class="menu-item menu-title">Minha Loja</span>
     <hr class="menu-item menu-line" />
-    <span class="menu-text menu-item">Perfumaria</span>
-    <span class="menu-text menu-item">Maquiagem</span>
-    <span class="menu-text menu-item">Cabelos</span>
-    <span class="menu-text menu-item">Infantil</span>
-    <div class="image-box">
+    <span class="menu-item menu-text">Perfumaria</span>
+    <span class="menu-item menu-text">Maquiagem</span>
+    <span class="menu-item menu-text">Cabelos</span>
+    <span class="menu-item menu-text">Infantil</span>
+    <div class="menu-ico_box">
       <em class="material-icons md-18 menu-ico">shopping_cart</em>
     </div>
   </div>
@@ -26,8 +26,9 @@ $font-color: #9c9a9a;
 $line-color: #e2e2e2;
 
 $dark-color: #737171;
-
+$light-color: #ffffff;
 $menu-font_family: "Robot", sans-serif;
+
 .menu-body {
   background-image: linear-gradient($gradient-color_start, $gradient-color_end);
   top: 0;
@@ -47,6 +48,7 @@ $menu-font_family: "Robot", sans-serif;
 .menu-title {
   font-weight: 700;
   color: $dark-color;
+  text-transform: uppercase;
 }
 .menu-text {
   text-transform: uppercase;
@@ -59,17 +61,25 @@ $menu-font_family: "Robot", sans-serif;
   width: 1px;
   cursor: default !important;
 }
-.image-box {
+.menu-ico_box {
   display: flex;
   border: 1px solid $line-color;
   border-radius: 20px;
   align-items: center;
   margin-left: auto;
-  margin-right: 1rem;
+  margin-right: 2rem;
   width: auto;
   padding: 6px;
   width: 2rem;
   justify-content: center;
+  background-color: $light-color;
+  &:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+    background-color: $dark-color;
+    .menu-ico {
+      color: $light-color;
+    }
+  }
 }
 .menu-ico {
   color: $dark-color;
