@@ -3,7 +3,7 @@
     <img v-bind:src="product.images[0].imageUrl" alt class="sku-image" />
     <h3 class="sku-title">{{product.name}}</h3>
     <p class="sku-price">R${{Number(product.Value).toFixed()}},00</p>
-    <button class="btn">
+    <button class="btn" @click="addToCart">
       <em class="material-icons md-18 btn-ico">add</em>
       <span class="btn-text">Add to Cart</span>
     </button>
@@ -15,6 +15,11 @@ export default {
   name: "Product",
   props: {
     product: Object
+  },
+  methods: {
+    addToCart({ product }) {
+      this.$emit("add-to-cart", product);
+    }
   }
 };
 </script>

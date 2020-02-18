@@ -9,7 +9,7 @@
     </div>
     <div class="product-container">
       <div :key="product.name" v-for="product in productList">
-        <Product :product="product" />
+        <Product :product="product" v-on:add-to-cart="(addToCart(product))" />
       </div>
     </div>
   </div>
@@ -27,8 +27,38 @@ export default {
   },
   data() {
     return {
-      productList
+      productList,
+      cart: []
     };
+  },
+  methods: {
+    addToCart(product) {
+      let indexInCart = this.search(product.name, this.cart);
+      if (indexInCart != null) {
+        let existingItem = this.cart[indexInCart];
+        existingItem.quantity++;
+        existingItem.total = product.Value * existingItem.quantity;
+        this.cart[indexInCart] = existingItem;
+      } else {
+        let qtt = 1;
+        let total = product.Value * qtt;
+        let cartItem = {
+          name: product.name,
+          total: total,
+          quantity: qtt
+        };
+        this.cart.push(cartItem);
+      }
+      // eslint-disable-next-line
+      console.table(this.cart);
+    },
+    search(nameKey, array) {
+      for (var i = 0; i < array.length; i++) {
+        if (array[i].name === nameKey) {
+          return i;
+        }
+      }
+    }
   }
 };
 </script>
