@@ -7,7 +7,7 @@
     <span class="menu-text menu-item">Cabelos</span>
     <span class="menu-text menu-item">Infantil</span>
     <div class="image-box">
-      <i class="material-icons md-18" style="color:#737171">shopping_cart</i>
+      <em class="material-icons md-18 menu-ico">shopping_cart</em>
     </div>
   </div>
 </template>
@@ -21,9 +21,13 @@ export default {
 <style lang="scss" scoped>
 $gradient-color_start: #fefefe;
 $gradient-color_end: #fbfbfb;
+
 $font-color: #9c9a9a;
 $line-color: #e2e2e2;
-$title-color: #737171;
+
+$dark-color: #737171;
+
+$menu-font_family: "Robot", sans-serif;
 .menu-body {
   background-image: linear-gradient($gradient-color_start, $gradient-color_end);
   top: 0;
@@ -34,15 +38,15 @@ $title-color: #737171;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  font-family: "Roboto", sans-serif;
   border-bottom: 1px solid $line-color;
+  font-family: $menu-font_family;
 }
 .menu-item {
   margin: 0 1rem 0 2rem;
 }
 .menu-title {
   font-weight: 700;
-  color: $title-color !important;
+  color: $dark-color;
 }
 .menu-text {
   text-transform: uppercase;
@@ -66,6 +70,9 @@ $title-color: #737171;
   padding: 6px;
   width: 2rem;
   justify-content: center;
+}
+.menu-ico {
+  color: $dark-color;
 }
 * :hover {
   cursor: pointer;

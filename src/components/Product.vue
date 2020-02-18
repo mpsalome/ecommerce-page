@@ -1,8 +1,12 @@
 <template>
   <div class="sku-body">
-    <img v-bind:src="image.imageUrl" alt class="sku-image" />
-    <h3 class="sku-title">{{name}}</h3>
-    <p class="sku-price">R${{Number(value).toFixed()}},00</p>
+    <img v-bind:src="product.images[0].imageUrl" alt class="sku-image" />
+    <h3 class="sku-title">{{product.name}}</h3>
+    <p class="sku-price">R${{Number(product.Value).toFixed()}},00</p>
+    <button class="btn">
+      <em class="material-icons md-18 btn-ico">add</em>
+      <span class="btn-text">Add to Cart</span>
+    </button>
   </div>
 </template>
 
@@ -10,20 +14,18 @@
 export default {
   name: "Product",
   props: {
-    name: String,
-    value: Number,
-    image: Object
+    product: Object
   }
 };
 </script>
 
 <style lang="scss">
-$secondary-color: #fff;
+$btn-primary_color: hsl(122, 39, 49);
+$btn-secondary_color: hsl(122, 39, 30);
+$btn-text_color: #fff;
 .sku-body {
   align-items: center;
   margin: 2rem 0 0 1rem;
-  font-family: "Roboto", sans-serif;
-  cursor: pointer;
   padding: 5px;
   width: 220px;
   height: 300px;
@@ -33,10 +35,11 @@ $secondary-color: #fff;
   border-radius: 7px;
   text-align: center;
   align-items: center;
+  &:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+  }
 }
-.sku-body:hover {
-  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
-}
+
 .sku-title {
   font-weight: 100;
   text-align: left;
@@ -51,5 +54,30 @@ $secondary-color: #fff;
 }
 .sku-image {
   width: 200px;
+}
+.btn {
+  display: flex;
+  flex-direction: row;
+  background-color: $btn-primary_color;
+  border: 0;
+  line-height: 2;
+  padding: 0 20px;
+  border-radius: 5px;
+  margin: 2px;
+  cursor: pointer;
+  &:hover {
+    background-color: $btn-secondary_color;
+    // box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.75);
+  }
+}
+.btn-text {
+  color: $btn-text_color;
+  font-size: 1rem;
+}
+.btn-ico {
+  color: $btn-text_color;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 2px 0 0;
 }
 </style>

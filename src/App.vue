@@ -9,7 +9,7 @@
     </div>
     <div class="product-container">
       <div :key="product.name" v-for="product in productList">
-        <Product :name="product.name" :value="product.Value" :image="product.images[0]" />
+        <Product :product="product" />
       </div>
     </div>
   </div>
@@ -37,9 +37,11 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
 $line-color: #fbfbfb;
 $title-color: #817e7e;
+$body-font_family: "Roboto", sans-serif;
 body {
   margin: 0 0 60px 0 !important;
   padding: 0;
+  font-family: $body-font_family;
 }
 .product-container {
   display: flex;
@@ -57,7 +59,6 @@ body {
 }
 .title {
   text-transform: uppercase;
-  font-family: "Roboto", sans-serif;
   letter-spacing: 1px;
   color: $title-color;
 }
