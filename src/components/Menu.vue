@@ -6,7 +6,7 @@
     <span class="menu-item menu-text">Maquiagem</span>
     <span class="menu-item menu-text">Cabelos</span>
     <span class="menu-item menu-text">Infantil</span>
-    <div class="menu-ico_box">
+    <div class="menu-ico_box" @click="$emit('click-cart')">
       <em class="material-icons md-18 menu-ico">shopping_cart</em>
     </div>
   </div>

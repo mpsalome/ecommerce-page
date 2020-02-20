@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <Menu />
+    <Menu v-on:click-cart="openCloseCart" />
+    <div v-if="isCartOpen">
+      <Cart :products="cart" v-on:close="openCloseCart" />
+    </div>
     <div class="call-to-action">
       <hr class="line" />
       <span class="title">últimos produtos</span>
@@ -19,19 +22,25 @@
 import Menu from "@/components/Menu";
 import Product from "@/components/Product";
 import productList from "@/assets/products.json";
+import Cart from "@/components/Cart";
 export default {
   name: "app",
   components: {
     Menu,
-    Product
+    Product,
+    Cart
   },
   data() {
     return {
       productList,
-      cart: []
+      cart: [],
+      isCartOpen: false
     };
   },
   methods: {
+    openCloseCart() {
+      this.isCartOpen = !this.isCartOpen;
+    },
     addToCart(product) {
       let indexInCart = this.search(product.name, this.cart);
       if (indexInCart != null) {
@@ -45,7 +54,9 @@ export default {
         let cartItem = {
           name: product.name,
           total: total,
-          quantity: qtt
+          quantity: qtt,
+          images: product.images,
+          Value: product.Value
         };
         this.cart.push(cartItem);
       }
