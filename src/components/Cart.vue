@@ -11,7 +11,11 @@
             <div v-if="products !== null">
               <div :key="product.name" v-for="product in products">
                 <div class="cart-item">
-                  <img v-bind:src="product.images[0].imageUrl" alt class="cart-item_image" />
+                  <em
+                    class="material-icons md-18 cart-item_remove"
+                    @click="$emit('remove-item', product)"
+                  >close</em>
+                  <img class="cart-item_image" v-bind:src="product.images[0].imageUrl" alt />
                   <div class="cart-item_desc">
                     <h3 class="cart-item_title">{{product.name}}</h3>
                     <p
@@ -67,6 +71,11 @@ export default {
       });
 
       this.total = result;
+    }
+  },
+  watch: {
+    products: function() {
+      this.calcTotal();
     }
   }
 };
@@ -208,5 +217,10 @@ $btn-secondary_color: #fff;
 .cart-total {
   font-weight: 600;
   margin: 30px 10px;
+}
+.cart-item_remove {
+  color: red;
+  font-weight: bolder !important;
+  cursor: pointer;
 }
 </style>

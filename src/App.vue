@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <Menu v-on:click-cart="openCloseCart" />
     <div v-if="isCartOpen">
-      <Cart :products="cart" v-on:close="openCloseCart" />
+      <Cart :products="cart" v-on:close="openCloseCart" v-on:remove-item="removeFromCart" />
     </div>
     <div class="call-to-action">
       <hr class="line" />
@@ -60,8 +60,6 @@ export default {
         };
         this.cart.push(cartItem);
       }
-      // eslint-disable-next-line
-      console.table(this.cart);
     },
     search(nameKey, array) {
       for (var i = 0; i < array.length; i++) {
@@ -69,6 +67,10 @@ export default {
           return i;
         }
       }
+    },
+    removeFromCart(product) {
+      let index = this.search(product.name, this.cart);
+      this.cart.splice(index, 1);
     }
   }
 };
