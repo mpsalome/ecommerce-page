@@ -1,30 +1,43 @@
 <template>
   <transition name="cart">
-    <div class="cart-mask" @click="$emit('close')">
+    <div class="cart-mask">
       <div class="cart-wrapper">
         <div class="cart-container">
           <div class="cart-header">
             <span>Carrinho de Compras</span>
           </div>
+          <hr />
           <div class="cart-body">
             <div v-if="products !== null">
               <div :key="product.name" v-for="product in products">
                 <div class="cart-item">
                   <img v-bind:src="product.images[0].imageUrl" alt class="cart-item_image" />
-                  <h3 class="cart-item_title">{{product.name}}</h3>
-                  <p class="cart-item_price">R${{Number(product.Value).toFixed()}},00</p>
+                  <div class="cart-item_desc">
+                    <h3 class="cart-item_title">{{product.name}}</h3>
+                    <p
+                      class="cart-item_price"
+                    >{{product.quantity}} x R${{Number(product.Value).toFixed()}},00</p>
+                  </div>
                 </div>
               </div>
             </div>
             <div v-if="products.isEmpty" class="cart-item">
               <span class="cart-item_title">carrinho de compras está vazio</span>
             </div>
+            <div class="cart-total">
+              <span>Total: R${{Number(total).toFixed()}},00</span>
+            </div>
           </div>
+          <hr />
           <div class="cart-footer">
-            <button class="btn" @click="$emit('close')">
-              <em class="material-icons">close</em>
-              <span>fechar</span>
-            </button>
+            <div class="cart-actions">
+              <button class="cart-btn cart-btn_outlined" @click="$emit('close')">
+                <span class="cart-btn_text">fechar</span>
+              </button>
+              <button class="cart-btn" @click="$emit('close')">
+                <span class="cart-btn_text">comprar</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -38,19 +51,31 @@ export default {
   props: {
     products: Array
   },
+  data() {
+    return {
+      total: 0
+    };
+  },
   created() {
-    // eslint-disable-next-line
-    console.log("lista");
-    // eslint-disable-next-line
-    console.log(this.products);
+    this.calcTotal();
+  },
+  methods: {
+    calcTotal() {
+      let result = 0;
+      this.products.forEach(product => {
+        result = result + product.total;
+      });
+
+      this.total = result;
+    }
   }
 };
 </script>
 
 <style lang="scss">
 $btn-primary_color: hsl(122, 39, 49);
-$btn-secondary_color: hsl(122, 39, 30);
-$btn-text_color: #fff;
+$btn-darker_color: hsl(122, 39, 30);
+$btn-secondary_color: #fff;
 .cart-mask {
   position: fixed;
   z-index: 9998;
@@ -71,6 +96,9 @@ $btn-text_color: #fff;
 }
 .cart-footer {
   margin: 1rem 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .cart-container {
   width: 300px;
@@ -87,7 +115,6 @@ $btn-text_color: #fff;
 
 .cart-header h3 {
   margin-top: 0;
-  color: #42b983;
 }
 
 .cart-body {
@@ -129,6 +156,7 @@ $btn-text_color: #fff;
   text-align: left;
   font-size: 12px;
   font-weight: 700;
+  margin: 20px 0;
 }
 .cart-item_price {
   margin: -1rem 0 0 1rem;
@@ -138,30 +166,47 @@ $btn-text_color: #fff;
 .cart-item_image {
   width: 100px;
 }
-.btn {
+.cart-btn_text {
+  font-size: 14px;
+  text-transform: capitalize;
+}
+.cart-btn {
+  margin: 0 1rem;
   display: flex;
   flex-direction: row;
   background-color: $btn-primary_color;
-  border: 0;
+  border: 1px solid $btn-primary_color;
   line-height: 2;
   padding: 0 20px;
   border-radius: 5px;
-  margin: 2px;
+  color: $btn-secondary_color;
   cursor: pointer;
-  color: $btn-text_color;
   &:hover {
-    background-color: $btn-secondary_color;
-    // box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.75);
+    background-color: $btn-darker_color;
+    font-weight: 600;
   }
 }
-.btn-text {
-  color: $btn-text_color;
-  font-size: 1rem;
+.cart-btn_outlined {
+  background-color: $btn-secondary_color;
+  color: $btn-primary_color;
+  border: 1px solid $btn-primary_color;
+  &:hover {
+    background-color: $btn-primary_color;
+    color: $btn-secondary_color;
+    font-weight: 600;
+  }
 }
-.btn-ico {
-  color: $btn-text_color;
-  align-items: center;
-  justify-content: center;
-  margin: 4px 2px 0 0;
+.cart-item_desc {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+.cart-actions {
+  display: flex;
+  flex-direction: row;
+}
+.cart-total {
+  font-weight: 600;
+  margin: 30px 10px;
 }
 </style>
