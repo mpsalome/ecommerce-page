@@ -1,5 +1,7 @@
 # ecommerce-page
 
+## hosted at https://marxus-ecommerce.herokuapp.com/ 
+
 ## Project setup
 ```
 npm install
